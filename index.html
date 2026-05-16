@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LucroClaro — Calculadora de Custos para Empreendedores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <span class="logo-text">LucroClaro</span>
+      </div>
+      <nav class="nav">
+        <a href="#calculadora" class="nav-link">Calculadora</a>
+        <a href="#como-funciona" class="nav-link">Como funciona</a>
+        <a href="#premium" class="nav-link nav-link-premium">Premium ✦</a>
+      </nav>
+      <button class="btn-menu" id="btnMenu" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-dots"></div>
+  </div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-badge">Para agricultura familiar & profissionais autônomos</div>
+      <h1 class="hero-title">Descubra se o seu produto <em>realmente</em> dá lucro</h1>
+      <p class="hero-desc">Calcule o custo real dos seus produtos, defina preços justos e tome decisões com clareza. Sem enrolação, sem planilha complicada.</p>
+      <div class="hero-actions">
+        <a href="#calculadora" class="btn btn-primary">Começar agora — é grátis</a>
+        <a href="#como-funciona" class="btn btn-ghost">Ver como funciona →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>Grátis</strong><span>Para sempre</span></div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat"><strong>+10</strong><span>Tipos de produto</span></div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat"><strong>100%</strong><span>No seu navegador</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Como funciona -->
+<section class="section" id="como-funciona">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Simples assim</div>
+      <h2 class="section-title">Como funciona</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Escolha o tipo de produto</h3>
+          <p>Peixe, ovo, galinha, hora de trabalho… temos categorias específicas para cada tipo.</p>
+        </div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Informe seus custos</h3>
+          <p>Insumos, mão de obra, embalagem, transporte. Tudo que envolve produzir ou ofertar seu serviço.</p>
+        </div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Veja o resultado na hora</h3>
+          <p>Lucro, prejuízo, margem — tudo calculado em tempo real com linguagem clara.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Calculadora principal -->
+<section class="section section-calc" id="calculadora">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Calculadora gratuita</div>
+      <h2 class="section-title">Calcule agora</h2>
+      <p class="section-desc">Selecione o tipo de produto e preencha os campos abaixo.</p>
+    </div>
+
+    <div class="calc-layout">
+
+      <!-- Sidebar: seletor de produto -->
+      <aside class="calc-sidebar">
+        <p class="sidebar-title">Tipo de produto</p>
+        <div class="product-list" id="productList">
+
+          <div class="product-group-label">🌾 Agricultura familiar</div>
+          <button class="product-btn active" data-product="peixe">
+            <span class="product-icon">🐟</span>
+            <span>Peixes</span>
+          </button>
+          <button class="product-btn" data-product="ovo">
+            <span class="product-icon">🥚</span>
+            <span>Ovos</span>
+          </button>
+          <button class="product-btn" data-product="galinha">
+            <span class="product-icon">🐓</span>
+            <span>Galinhas</span>
+          </button>
+          <button class="product-btn" data-product="mel">
+            <span class="product-icon">🍯</span>
+            <span>Mel</span>
+          </button>
+          <button class="product-btn" data-product="hortalica">
+            <span class="product-icon">🥬</span>
+            <span>Hortaliças</span>
+          </button>
+
+          <div class="product-group-label" style="margin-top:1rem">💼 Profissionais</div>
+          <button class="product-btn" data-product="programador">
+            <span class="product-icon">💻</span>
+            <span>Programador</span>
+          </button>
+          <button class="product-btn" data-product="nutricionista">
+            <span class="product-icon">🥗</span>
+            <span>Nutricionista</span>
+          </button>
+          <button class="product-btn" data-product="advogado">
+            <span class="product-icon">⚖️</span>
+            <span>Advogado</span>
+          </button>
+          <button class="product-btn" data-product="designer">
+            <span class="product-icon">🎨</span>
+            <span>Designer</span>
+          </button>
+          <button class="product-btn" data-product="autonomo">
+            <span class="product-icon">🔧</span>
+            <span>Autônomo geral</span>
+          </button>
+
+        </div>
+      </aside>
+
+      <!-- Formulário de cálculo -->
+      <main class="calc-main">
+        <div class="calc-card" id="calcCard">
+
+          <div class="calc-header" id="calcHeader">
+            <div class="calc-product-icon" id="calcIcon">🐟</div>
+            <div>
+              <h3 id="calcTitle">Peixes</h3>
+              <p id="calcSubtitle" class="calc-subtitle">Calcule o custo por quilo ou unidade</p>
+            </div>
+          </div>
+
+          <form id="calcForm" autocomplete="off">
+
+            <!-- Seção: Informações básicas -->
+            <div class="form-section">
+              <div class="form-section-title">📦 Produção</div>
+              <div class="form-row" id="rowQuantidade">
+                <label class="form-label" id="labelQuantidade">Quantidade produzida (kg)</label>
+                <input type="number" class="form-input" id="quantidade" min="0" step="0.1" placeholder="Ex.: 50" value="">
+              </div>
+              <div class="form-row" id="rowUnidade" style="display:none">
+                <label class="form-label" id="labelUnidade">Unidade de medida</label>
+                <select class="form-input" id="unidade">
+                  <option value="kg">Quilos (kg)</option>
+                  <option value="un">Unidades</option>
+                  <option value="dz">Dúzias</option>
+                  <option value="cx">Caixas</option>
+                  <option value="h">Horas</option>
+                  <option value="consulta">Consultas</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Seção: Custos diretos -->
+            <div class="form-section">
+              <div class="form-section-title">💰 Custos diretos</div>
+
+              <div id="custosDinamicos">
+                <!-- renderizados pelo JS -->
+              </div>
+
+              <button type="button" class="btn-add-cost" id="btnAddCusto">
+                + Adicionar custo personalizado
+              </button>
+            </div>
+
+            <!-- Seção: Custos fixos mensais -->
+            <div class="form-section">
+              <div class="form-section-title">🏠 Custos fixos mensais <span class="tooltip-icon" title="Aluguel, luz, água, internet, etc. Será rateado pela quantidade produzida.">?</span></div>
+              <div class="form-row">
+                <label class="form-label">Total de custos fixos mensais (R$)</label>
+                <input type="number" class="form-input" id="custoFixo" min="0" step="0.01" placeholder="Ex.: 800" value="">
+              </div>
+              <div class="form-row" id="rowProducaoMensal">
+                <label class="form-label" id="labelProducaoMensal">Quantidade mensal total produzida</label>
+                <input type="number" class="form-input" id="producaoMensal" min="0" step="0.1" placeholder="Ex.: 200" value="">
+              </div>
+            </div>
+
+            <!-- Seção: Preço de venda -->
+            <div class="form-section">
+              <div class="form-section-title">🏷️ Precificação</div>
+              <div class="form-row">
+                <label class="form-label" id="labelPrecoVenda">Preço de venda (R$)</label>
+                <input type="number" class="form-input" id="precoVenda" min="0" step="0.01" placeholder="Ex.: 15,00" value="">
+              </div>
+              <div class="form-row">
+                <label class="form-label">Margem de lucro desejada (%)</label>
+                <input type="number" class="form-input" id="margemDesejada" min="0" step="1" placeholder="Ex.: 30" value="">
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-primary btn-full" id="btnCalcular">Calcular agora</button>
+              <button type="button" class="btn btn-ghost btn-full" id="btnLimpar">Limpar campos</button>
+            </div>
+
+          </form>
+
+          <!-- Resultado -->
+          <div class="resultado" id="resultado" style="display:none">
+            <div class="resultado-divider"></div>
+            <h4 class="resultado-title">Resultado da análise</h4>
+
+            <div class="resultado-cards">
+              <div class="resultado-card">
+                <span class="rc-label">Custo total por unidade</span>
+                <span class="rc-value" id="rcCustoUnit">R$ —</span>
+              </div>
+              <div class="resultado-card">
+                <span class="rc-label">Preço de venda atual</span>
+                <span class="rc-value" id="rcPrecoVenda">R$ —</span>
+              </div>
+              <div class="resultado-card resultado-card-destaque" id="rcDestaque">
+                <span class="rc-label" id="rcDestaqueLabel">Lucro por unidade</span>
+                <span class="rc-value" id="rcDestaqueValue">R$ —</span>
+              </div>
+              <div class="resultado-card">
+                <span class="rc-label">Margem real</span>
+                <span class="rc-value" id="rcMargem">— %</span>
+              </div>
+            </div>
+
+            <div class="resultado-veredicto" id="veredicto">
+              <!-- veredicto dinâmico -->
+            </div>
+
+            <div class="resultado-preco-sugerido" id="precoSugerido" style="display:none">
+              <!-- preço sugerido -->
+            </div>
+
+            <!-- CTA Premium: ponto de equilíbrio bloqueado -->
+            <div class="premium-blur-card" id="premiumCard">
+              <div class="premium-blur-content">
+                <div class="premium-blur-values">
+                  <div class="premium-blur-item">
+                    <span>Ponto de equilíbrio</span>
+                    <span class="blur-value">XX unid.</span>
+                  </div>
+                  <div class="premium-blur-item">
+                    <span>Faturamento mínimo</span>
+                    <span class="blur-value">R$ X.XXX</span>
+                  </div>
+                  <div class="premium-blur-item">
+                    <span>Projeção mensal</span>
+                    <span class="blur-value">R$ X.XXX</span>
+                  </div>
+                </div>
+                <div class="premium-lock">
+                  <span class="lock-icon">🔒</span>
+                  <p>Essas análises avançadas estão disponíveis no plano <strong>Premium</strong></p>
+                  <a href="#premium" class="btn btn-premium-small">Ver plano Premium ✦</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Histórico de cálculos -->
+        <div class="historico-section" id="historicoSection" style="display:none">
+          <div class="historico-header">
+            <h4>Histórico desta sessão</h4>
+            <button class="btn-clear-hist" id="btnClearHist">Limpar histórico</button>
+          </div>
+          <div class="historico-list" id="historicoList"></div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+</section>
+
+<!-- Premium -->
+<section class="section section-premium" id="premium">
+  <div class="container">
+    <div class="premium-inner">
+      <div class="premium-badge">✦ Premium</div>
+      <h2 class="premium-title">Análise completa para<br>quem leva o negócio a sério</h2>
+      <p class="premium-desc">Tudo do plano grátis, mais as ferramentas que fazem diferença na hora de escalar.</p>
+
+      <div class="premium-cards">
+
+        <div class="plan-card plan-free">
+          <div class="plan-name">Grátis</div>
+          <div class="plan-price">R$ 0</div>
+          <ul class="plan-features">
+            <li class="feat-ok">✓ Cálculo de custo unitário</li>
+            <li class="feat-ok">✓ Lucro / prejuízo por produto</li>
+            <li class="feat-ok">✓ Margem real de lucro</li>
+            <li class="feat-ok">✓ Preço de venda sugerido</li>
+            <li class="feat-ok">✓ Histórico da sessão</li>
+            <li class="feat-no">✗ Ponto de equilíbrio</li>
+            <li class="feat-no">✗ Projeção de faturamento</li>
+            <li class="feat-no">✗ Relatório em PDF/Excel</li>
+            <li class="feat-no">✗ Comparação entre produtos</li>
+            <li class="feat-no">✗ Simulações de cenários</li>
+          </ul>
+          <a href="#calculadora" class="btn btn-ghost btn-full">Usar grátis</a>
+        </div>
+
+        <div class="plan-card plan-premium">
+          <div class="plan-badge-top">Mais popular</div>
+          <div class="plan-name">Premium</div>
+          <div class="plan-price">R$ 19<span>/mês</span></div>
+          <ul class="plan-features">
+            <li class="feat-ok">✓ Tudo do plano grátis</li>
+            <li class="feat-ok">✓ <strong>Ponto de equilíbrio</strong></li>
+            <li class="feat-ok">✓ Projeção mensal / anual</li>
+            <li class="feat-ok">✓ <strong>Relatório em PDF e Excel</strong></li>
+            <li class="feat-ok">✓ Comparação entre produtos</li>
+            <li class="feat-ok">✓ Simulações de cenário (otimista / pessimista)</li>
+            <li class="feat-ok">✓ Histórico permanente na nuvem</li>
+            <li class="feat-ok">✓ Suporte prioritário</li>
+          </ul>
+          <button class="btn btn-primary btn-full" onclick="alert('Em breve! Deixe seu e-mail para ser notificado quando o Premium for lançado.')">Quero o Premium ✦</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <span class="logo-text">LucroClaro</span>
+      </div>
+      <p class="footer-tagline">Calculadora de custos para quem produz com dedicação.</p>
+      <p class="footer-copy">© 2025 LucroClaro · Feito com ♥ para o empreendedorismo brasileiro</p>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
