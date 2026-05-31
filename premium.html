@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LucroClaro Premium — Análise Avançada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- SheetJS (xlsx) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="premium.css">
+</head>
+<body>
+
+<!-- ===== GATE: Tela de acesso ===== -->
+<div id="accessGate" class="gate">
+  <div class="gate-bg">
+    <div class="gate-orb gate-orb-1"></div>
+    <div class="gate-orb gate-orb-2"></div>
+    <div class="gate-grid"></div>
+  </div>
+  <div class="gate-card">
+    <div class="gate-logo">
+      <span class="logo-icon">◈</span>
+      <span class="logo-text">LucroClaro</span>
+      <span class="gate-badge">✦ Premium</span>
+    </div>
+    <h1 class="gate-title">Área restrita</h1>
+    <p class="gate-desc">Insira seu código de acesso Premium para continuar.</p>
+    <div class="gate-form">
+      <input type="password" id="accessCode" class="gate-input" placeholder="••••••••••" maxlength="30" autocomplete="off">
+      <button class="gate-btn" id="gateBtn">Entrar →</button>
+    </div>
+    <p class="gate-error" id="gateError" style="display:none">Código inválido. Tente novamente.</p>
+    <a href="index.html" class="gate-back">← Voltar ao LucroClaro gratuito</a>
+    <p class="gate-demo-hint">💡 Para testar: use o código <strong>PREMIUM2025</strong></p>
+  </div>
+</div>
+
+<!-- ===== APP PREMIUM (oculto até login) ===== -->
+<div id="premiumApp" style="display:none">
+
+  <!-- Header -->
+  <header class="pheader">
+    <div class="pcontainer">
+      <div class="pheader-inner">
+        <a href="index.html" class="logo">
+          <span class="logo-icon">◈</span>
+          <span class="logo-text">LucroClaro</span>
+          <span class="premium-pill">✦ Premium</span>
+        </a>
+        <nav class="pnav">
+          <button class="pnav-btn active" data-tab="equilibrio">Equilíbrio</button>
+          <button class="pnav-btn" data-tab="projecao">Projeção</button>
+          <button class="pnav-btn" data-tab="comparacao">Comparação</button>
+          <button class="pnav-btn" data-tab="cenarios">Cenários</button>
+          <button class="pnav-btn" data-tab="relatorio">Relatório</button>
+        </nav>
+        <button class="btn-logout" id="btnLogout">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero premium -->
+  <div class="phero">
+    <div class="pcontainer">
+      <div class="phero-inner">
+        <div class="phero-tag">✦ Análise avançada</div>
+        <h1 class="phero-title">Painel <em>Premium</em></h1>
+        <p class="phero-desc">Preencha os dados do produto abaixo e explore todas as análises no painel.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dados do produto (formulário central compartilhado) -->
+  <div class="pcontainer">
+    <div class="produto-form-card" id="produtoFormCard">
+      <div class="pfc-header">
+        <h3>📦 Dados do produto</h3>
+        <p>Estes dados alimentam todos os cálculos abaixo</p>
+      </div>
+      <div class="pfc-grid">
+        <div class="pfc-field">
+          <label>Nome do produto / serviço</label>
+          <input type="text" id="pNome" class="pinput" placeholder="Ex.: Peixe tilápia por kg">
+        </div>
+        <div class="pfc-field">
+          <label>Custo direto total (R$)</label>
+          <input type="number" id="pCustoDireto" class="pinput" placeholder="Ex.: 400" min="0" step="0.01">
+        </div>
+        <div class="pfc-field">
+          <label>Quantidade produzida</label>
+          <input type="number" id="pQuantidade" class="pinput" placeholder="Ex.: 50" min="0" step="0.1">
+        </div>
+        <div class="pfc-field">
+          <label>Custos fixos mensais (R$)</label>
+          <input type="number" id="pCustoFixo" class="pinput" placeholder="Ex.: 800" min="0" step="0.01">
+        </div>
+        <div class="pfc-field">
+          <label>Produção mensal total</label>
+          <input type="number" id="pProducaoMensal" class="pinput" placeholder="Ex.: 200" min="0" step="0.1">
+        </div>
+        <div class="pfc-field">
+          <label>Preço de venda atual (R$)</label>
+          <input type="number" id="pPrecoVenda" class="pinput" placeholder="Ex.: 15" min="0" step="0.01">
+        </div>
+      </div>
+      <button class="btn-calcular-tudo" id="btnCalcTudo">Calcular tudo ✦</button>
+    </div>
+  </div>
+
+  <!-- Tabs content -->
+  <div class="pcontainer ptabs-container">
+
+    <!-- ===== TAB: PONTO DE EQUILÍBRIO ===== -->
+    <div class="ptab-content active" id="tab-equilibrio">
+      <div class="ptab-header">
+        <h2>⚖️ Ponto de equilíbrio</h2>
+        <p>Quantas unidades você precisa vender para cobrir todos os custos.</p>
+      </div>
+      <div class="pe-layout">
+        <div class="pe-cards">
+          <div class="metric-card">
+            <span class="mc-label">Ponto de equilíbrio</span>
+            <span class="mc-value accent" id="peUnidades">—</span>
+            <span class="mc-sub">unidades / mês</span>
+          </div>
+          <div class="metric-card">
+            <span class="mc-label">Faturamento mínimo</span>
+            <span class="mc-value" id="peFaturamento">—</span>
+            <span class="mc-sub">para cobrir custos</span>
+          </div>
+          <div class="metric-card">
+            <span class="mc-label">Margem de contribuição</span>
+            <span class="mc-value" id="peMargemContrib">—</span>
+            <span class="mc-sub">por unidade</span>
+          </div>
+          <div class="metric-card">
+            <span class="mc-label">% da produção atual</span>
+            <span class="mc-value" id="pePorcProd">—</span>
+            <span class="mc-sub">necessária para equilíbrio</span>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Receita vs. Custos totais</div>
+          <canvas id="chartEquilibrio" height="280"></canvas>
+        </div>
+      </div>
+      <div class="pe-insight" id="peInsight"></div>
+    </div>
+
+    <!-- ===== TAB: PROJEÇÃO ===== -->
+    <div class="ptab-content" id="tab-projecao">
+      <div class="ptab-header">
+        <h2>📈 Projeção mensal e anual</h2>
+        <p>Estimativa de faturamento, custos e lucro ao longo do tempo.</p>
+      </div>
+      <div class="proj-controls">
+        <div class="proj-ctrl">
+          <label>Crescimento mensal estimado (%)</label>
+          <input type="number" id="projCrescimento" class="pinput-sm" value="5" min="0" max="100" step="1">
+        </div>
+        <div class="proj-ctrl">
+          <label>Meses para projetar</label>
+          <select id="projMeses" class="pinput-sm">
+            <option value="6">6 meses</option>
+            <option value="12" selected>12 meses</option>
+            <option value="24">24 meses</option>
+          </select>
+        </div>
+        <button class="btn-sm-accent" id="btnProjetar">Projetar →</button>
+      </div>
+      <div class="proj-summary-cards" id="projSummary"></div>
+      <div class="chart-card" style="margin-top:1.5rem">
+        <div class="chart-title">Projeção de lucro acumulado</div>
+        <canvas id="chartProjecao" height="300"></canvas>
+      </div>
+      <div class="proj-table-wrap" id="projTableWrap"></div>
+    </div>
+
+    <!-- ===== TAB: COMPARAÇÃO ===== -->
+    <div class="ptab-content" id="tab-comparacao">
+      <div class="ptab-header">
+        <h2>🔀 Comparação entre produtos</h2>
+        <p>Adicione até 5 produtos e compare rentabilidade lado a lado.</p>
+      </div>
+      <div class="comp-add-area">
+        <div class="comp-fields">
+          <input type="text" id="compNome" class="pinput-sm" placeholder="Nome do produto">
+          <input type="number" id="compCusto" class="pinput-sm" placeholder="Custo unit. (R$)" min="0" step="0.01">
+          <input type="number" id="compPreco" class="pinput-sm" placeholder="Preço venda (R$)" min="0" step="0.01">
+          <input type="number" id="compQtd" class="pinput-sm" placeholder="Qtd/mês" min="0" step="1">
+          <button class="btn-sm-accent" id="btnAddComp">+ Adicionar</button>
+        </div>
+      </div>
+      <div id="compList" class="comp-list"></div>
+      <div id="compChartArea" style="display:none">
+        <div class="comp-charts-grid">
+          <div class="chart-card">
+            <div class="chart-title">Margem de lucro por produto (%)</div>
+            <canvas id="chartCompMargem" height="280"></canvas>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Lucro total mensal por produto (R$)</div>
+            <canvas id="chartCompLucro" height="280"></canvas>
+          </div>
+        </div>
+        <div class="comp-ranking" id="compRanking"></div>
+      </div>
+    </div>
+
+    <!-- ===== TAB: CENÁRIOS ===== -->
+    <div class="ptab-content" id="tab-cenarios">
+      <div class="ptab-header">
+        <h2>🎯 Simulação de cenários</h2>
+        <p>Veja o impacto de variações nos custos e no preço de venda.</p>
+      </div>
+      <div class="cen-controls">
+        <div class="cen-slider-group">
+          <label>Variação de custo — pessimista <span id="labelCustoPess">+20%</span></label>
+          <input type="range" id="sliderCustoPess" min="0" max="100" value="20" step="5" class="pslider">
+        </div>
+        <div class="cen-slider-group">
+          <label>Variação de preço — otimista <span id="labelPrecoOtim">+20%</span></label>
+          <input type="range" id="sliderPrecoOtim" min="0" max="100" value="20" step="5" class="pslider">
+        </div>
+        <div class="cen-slider-group">
+          <label>Variação de volume — otimista <span id="labelVolOtim">+30%</span></label>
+          <input type="range" id="sliderVolOtim" min="0" max="100" value="30" step="5" class="pslider">
+        </div>
+      </div>
+      <div class="cen-cards" id="cenCards"></div>
+      <div class="chart-card" style="margin-top:1.5rem">
+        <div class="chart-title">Lucro mensal por cenário (R$)</div>
+        <canvas id="chartCenarios" height="260"></canvas>
+      </div>
+    </div>
+
+    <!-- ===== TAB: RELATÓRIO ===== -->
+    <div class="ptab-content" id="tab-relatorio">
+      <div class="ptab-header">
+        <h2>📄 Relatório completo</h2>
+        <p>Exporte todos os dados calculados em PDF ou Excel.</p>
+      </div>
+      <div class="rel-preview" id="relPreview">
+        <div class="rel-preview-inner" id="relContent">
+          <div class="rel-empty">
+            <span style="font-size:3rem">📊</span>
+            <p>Preencha os dados e clique em <strong>Calcular tudo</strong> para gerar o relatório.</p>
+          </div>
+        </div>
+      </div>
+      <div class="rel-actions">
+        <button class="btn-export btn-pdf" id="btnExportPDF">
+          <span>⬇</span> Exportar PDF
+        </button>
+        <button class="btn-export btn-excel" id="btnExportExcel">
+          <span>⬇</span> Exportar Excel
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /ptabs-container -->
+
+</div><!-- /premiumApp -->
+
+<script src="premium.js"></script>
+</body>
+</html>
